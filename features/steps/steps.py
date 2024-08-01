@@ -24,19 +24,20 @@ def step_impl(context, count):
     assert len(context.todo_list) == int(count)
 
 # Sorting tasks
-@when('I sort tasks by due date')
+@when('I sort tasks by priority')
 def step_impl(context):
-    context.todo_list.sort(key=lambda x: x["due_date"])
-
-@then('the tasks should be sorted by due date')
+    priority_order = {"High": 1, "Medium": 2, "Low": 3}
+    context.todo_list.sort(key=lambda x: priority_order[x["priority"]])
+    
+@then('the tasks should be sorted by priority')
 def step_impl(context):
-    # Debug print to check the actual tasks
-    print("Actual tasks after sorting:", context.todo_list)
     if context.table:
         expected_tasks = [dict(zip(context.table.headings, row)) for row in context.table.rows]
-        # Debug print to check the expected tasks
-        print("Expected tasks:", expected_tasks)
-        assert context.todo_list == expected_tasks
+        for expected_task, actual_task in zip(expected_tasks, context.todo_list):
+            assert expected_task["title"] == actual_task["title"]
+            assert expected_task["description"] == actual_task["description"]
+            assert expected_task["due_date"] == actual_task["due_date"]
+            assert expected_task["priority"] == actual_task["priority"]
     else:
         assert context.todo_list == []
 

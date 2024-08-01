@@ -16,19 +16,23 @@ class ToDoList:
     def __init__(self):
         self.tasks = []
 
+    #add task
     def add_task(self, title, description, due_date, priority):
         task = Task(title, description, due_date, priority)
         self.tasks.append(task)
 
+    #sort task
     def sort_tasks(self, by='priority'):
         if by == 'priority':
             self.tasks.sort(key=lambda x: x.priority)
         elif by == 'due_date':
             self.tasks.sort(key=lambda x: x.due_date)
 
+    #list tasks
     def list_tasks(self):
         return [str(task) for task in self.tasks]
 
+    #mark tasks
     def mark_task_as_completed(self, title):
         for task in self.tasks:
             if task.title == title:
@@ -36,9 +40,11 @@ class ToDoList:
                 return True
         return False
 
+    #clear task
     def clear_tasks(self):
         self.tasks = []
     
+    #search task
     def search_tasks(self, keyword):
         return [str(task) for task in self.tasks if keyword in task.title or keyword in task.description]
 

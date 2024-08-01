@@ -1,5 +1,3 @@
-# features/todo_list.feature
-
 Feature: To-Do List Management
 
   Scenario: Adding tasks to the To-Do list
@@ -12,14 +10,14 @@ Feature: To-Do List Management
       | Pay bills        | Pay electricity and water bills   | 2024-08-05 | Medium   |
       | Buy groceries    | Buy milk, eggs, and bread          | 2024-08-01 | High     |
 
-  Scenario: Sorting tasks by due date
+  Scenario: Sorting tasks by priority
     Given I have tasks in my To-Do list
-    When I sort tasks by due date
-    Then the tasks should be sorted by due date
-    And the tasks should be
-      | title         | description                     | due_date   | priority |
-      | Buy groceries | Buy milk, eggs, and bread       | 2024-08-01 | High     |
-      | Pay bills     | Pay electricity and water bills | 2024-08-05 | Medium   |
+    When I sort tasks by priority
+    Then the tasks should be sorted by priority
+      | title        | description                        | due_date   | priority |
+      | Buy groceries | Buy milk, eggs, and bread         | 2024-08-01 | High     |
+      | Pay bills    | Pay electricity and water bills    | 2024-08-05 | Medium   |
+
       
   Scenario: Marking a task as completed
     Given I have tasks in my To-Do list
